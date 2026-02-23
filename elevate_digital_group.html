@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Elevate Digital Group — Nashville's premier web modernization agency. Fast, modern, conversion-focused websites for local businesses.">
+<title>Elevate Digital Group — Nashville Web Modernization</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0D1B2A;--navy-mid:#152336;--navy-light:#1E3451;--gold:#C9A84C;--gold-light:#E8C878;--cream:#FAF7F2;--white:#FFFFFF;--text:#1A2B3C;--text-mid:#4A6070;--text-soft:#7A90A4;--border:rgba(201,168,76,.18);--border-soft:rgba(255,255,255,.07);--ease:cubic-bezier(.16,1,.3,1)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--navy);color:#fff;font-family:'DM Sans',system-ui,sans-serif;overflow-x:hidden;cursor:none}
+a{text-decoration:none;color:inherit}
+.skip{position:absolute;top:-50px;left:1rem;background:var(--gold);color:var(--navy);padding:.6rem 1.2rem;border-radius:.4rem;font-weight:700;z-index:9999;transition:top .2s}
+.skip:focus{top:1rem}
+/* Cursor */
+#dot{position:fixed;width:9px;height:9px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .15s var(--ease)}
+#ring{position:fixed;width:34px;height:34px;border:1.5px solid rgba(201,168,76,.4);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s}
+#dot.h{transform:translate(-50%,-50%) scale(2.4);opacity:.45}
+#ring.h{width:52px;height:52px;border-color:var(--gold)}
+@media(pointer:coarse){#dot,#ring{display:none}body{cursor:auto}}
+/* Reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.rl{opacity:0;transform:translateX(-48px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.rv.on,.rl.on{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+/* Nav */
+nav{position:fixed;inset:0 0 auto;z-index:200;height:76px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;transition:background .4s,border-bottom .4s}
+nav.scrolled{background:rgba(13,27,42,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.logo{display:flex;align-items:center;gap:11px}
+.logo-mark{width:36px;height:36px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:17px;color:var(--navy);flex-shrink:0;transition:transform .35s var(--ease)}
+.logo:hover .logo-mark{transform:rotate(-6deg) scale(1.08)}
+.logo-name{font-family:'Playfair Display',serif;font-weight:700;font-size:15.5px;color:#fff;display:block}
+.logo-city{font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;display:block}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links a{font-size:13.5px;font-weight:500;color:rgba(255,255,255,.62);position:relative;transition:color .25s}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--gold);transition:width .3s var(--ease)}
+.nav-links a:hover{color:#fff}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;padding:9px 20px;border-radius:6px;font-weight:700!important}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--gold-light)!important}
+.ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.ham span{display:block;width:23px;height:2px;background:#fff;transition:all .3s;transform-origin:center}
+.ham.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mob{display:none;position:fixed;inset:0;background:var(--navy);z-index:190;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;transition:opacity .3s}
+.mob.open{opacity:1}
+.mob a{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#fff;transition:color .2s}
+.mob a:hover{color:var(--gold)}
+/* Hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding:120px 6% 96px}
+.hero-bg{position:absolute;inset:0;overflow:hidden}
+.grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.038) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.038) 1px,transparent 1px);background-size:76px 76px}
+.glow1{position:absolute;top:-280px;right:-180px;width:780px;height:780px;background:radial-gradient(circle,rgba(201,168,76,.09) 0%,transparent 65%);pointer-events:none}
+.glow2{position:absolute;bottom:-180px;left:-80px;width:580px;height:580px;background:radial-gradient(circle,rgba(30,52,81,.65) 0%,transparent 68%);pointer-events:none}
+.diag{position:absolute;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.2),transparent);pointer-events:none}
+.diag:nth-child(1){top:21%;right:6%;width:260px;transform:rotate(-22deg)}
+.diag:nth-child(2){top:57%;right:16%;width:360px;transform:rotate(-22deg)}
+.diag:nth-child(3){bottom:21%;left:4%;width:190px;transform:rotate(-22deg)}
+.hero-inner{position:relative;z-index:2;max-width:820px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'DM Mono',monospace;font-size:11.5px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:28px;opacity:0;animation:up .8s .18s var(--ease) forwards}
+.eyebrow::before{content:'';width:26px;height:1px;background:var(--gold);display:block}
+h1{font-family:'Playfair Display',serif;font-size:clamp(50px,7.2vw,98px);font-weight:900;line-height:1.01;letter-spacing:-2.5px;color:#fff;margin-bottom:26px;opacity:0;animation:up .9s .32s var(--ease) forwards}
+h1 em{color:var(--gold);font-style:italic}
+.hero-sub{font-size:18px;color:rgba(255,255,255,.56);line-height:1.74;max-width:510px;margin-bottom:46px;opacity:0;animation:up .9s .47s var(--ease) forwards}
+.hero-btns{display:flex;align-items:center;gap:18px;flex-wrap:wrap;opacity:0;animation:up .9s .6s var(--ease) forwards}
+.btn-g{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);font-weight:700;font-size:15px;padding:15px 30px;border-radius:8px;transition:background .25s,transform .2s,box-shadow .25s;box-shadow:0 8px 28px rgba(201,168,76,.3)}
+.btn-g:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 14px 38px rgba(201,168,76,.4)}
+.btn-t{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:500;font-size:15px;border-bottom:1px solid rgba(255,255,255,.28);padding-bottom:2px;transition:color .25s,border-color .25s}
+.btn-t:hover{color:var(--gold);border-color:var(--gold)}
+.hero-bar{position:absolute;bottom:0;left:0;right:0;z-index:2;display:flex;border-top:1px solid var(--border-soft);opacity:0;animation:up .9s .84s var(--ease) forwards}
+.hstat{flex:1;padding:24px 5%;border-right:1px solid var(--border-soft)}
+.hstat:last-child{border-right:none}
+.hstat-n{font-family:'Playfair Display',serif;font-size:33px;font-weight:700;color:var(--gold);line-height:1}
+.hstat-l{font-size:12px;color:rgba(255,255,255,.42);margin-top:4px;line-height:1.4}
+@keyframes up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+/* Marquee */
+.mq{background:var(--gold);overflow:hidden;padding:12px 0}
+.mq-in{display:flex;white-space:nowrap;animation:mq 28s linear infinite;width:max-content}
+.mq-i{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:var(--navy);letter-spacing:2px;text-transform:uppercase;padding:0 30px;display:inline-flex;align-items:center;gap:16px}
+.mq-i::after{content:'✦';font-size:9px;color:rgba(13,27,42,.35)}
+@keyframes mq{from{transform:none}to{transform:translateX(-50%)}}
+/* Section layout */
+.wrap{max-width:1280px;margin:0 auto;padding:0 6%}
+.tag{display:inline-flex;align-items:center;gap:9px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2.8px;text-transform:uppercase;margin-bottom:16px}
+.tag::before{content:'';width:20px;height:1px;background:var(--gold);display:block}
+h2.big{font-family:'Playfair Display',serif;font-size:clamp(32px,4.2vw,56px);font-weight:900;line-height:1.05;letter-spacing:-1.5px;color:#fff}
+h2.big.dk{color:var(--text)}
+h2.big em{color:var(--gold);font-style:italic}
+.lead{font-size:17px;line-height:1.76;color:rgba(255,255,255,.52);max-width:560px;margin-top:16px}
+.lead.dk{color:var(--text-mid)}
+/* About */
+.about{padding:116px 0;background:var(--navy)}
+.ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.mockup-wrap{position:relative}
+.mockup{background:var(--navy-mid);border:1px solid var(--border);border-radius:18px;overflow:hidden}
+.mbar{background:var(--navy-light);padding:14px 18px;display:flex;align-items:center;gap:7px;border-bottom:1px solid var(--border)}
+.wd{width:10px;height:10px;border-radius:50%}
+.wd.r{background:#FF5F57}.wd.y{background:#FFBD2E}.wd.g{background:#28C840}
+.url{flex:1;background:rgba(0,0,0,.28);border-radius:4px;padding:4px 10px;font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.32);margin-left:10px}
+.mbody{padding:26px;display:flex;flex-direction:column;gap:13px}
+.mhero{background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:10px;height:80px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--navy)}
+.mrow{display:flex;gap:10px}
+.mc{flex:1;background:var(--navy-light);border-radius:8px;height:56px;border:1px solid var(--border)}
+.ml{height:9px;border-radius:4px;background:var(--navy-light)}
+.ml.s{width:52%}.ml.gd{background:rgba(201,168,76,.28);width:36%}
+.score{position:absolute;bottom:-16px;right:-16px;background:var(--gold);color:var(--navy);font-family:'Playfair Display',serif;font-weight:900;border-radius:50%;width:74px;height:74px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;box-shadow:0 8px 28px rgba(201,168,76,.4)}
+.score .sn{font-size:24px}.score .sl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px}
+.flt{position:absolute;background:var(--navy-light);border:1px solid var(--border);border-radius:11px;padding:11px 15px;box-shadow:0 8px 26px rgba(0,0,0,.32)}
+.flt-n{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--gold)}
+.flt-l{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.44);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.flt1{top:-20px;left:-20px;animation:fa 4s ease-in-out infinite}
+.flt2{bottom:34px;right:-20px;animation:fb 5s ease-in-out infinite}
+@keyframes fa{0%,100%{transform:none}50%{transform:translateY(-8px)}}
+@keyframes fb{0%,100%{transform:none}50%{transform:translateY(6px)}}
+.prob-list{display:flex;flex-direction:column;gap:12px;margin-top:28px}
+.pi{display:flex;align-items:flex-start;gap:13px;padding:16px 20px;background:var(--navy-mid);border:1px solid var(--border-soft);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;transition:background .25s}
+.pi:hover{background:var(--navy-light)}
+.pico{width:32px;height:32px;background:rgba(201,168,76,.1);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.pt b{display:block;font-size:13.5px;font-weight:600;color:#fff;margin-bottom:2px}
+.pt span{font-size:12.5px;color:rgba(255,255,255,.46);line-height:1.5}
+/* Services */
+.svcs{padding:116px 0;background:var(--cream)}
+.svcs-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.sc{background:#fff;border:1px solid #E8EBF0;border-radius:16px;padding:36px 32px;display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden;transition:transform .35s var(--ease),box-shadow .35s,border-color .3s}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));transform:scaleX(0);transition:transform .4s var(--ease);transform-origin:left}
+.sc:hover{transform:translateY(-6px);box-shadow:0 20px 52px rgba(13,27,42,.1);border-color:rgba(201,168,76,.25)}
+.sc:hover::before{transform:scaleX(1)}
+.sico{width:48px;height:48px;background:linear-gradient(135deg,rgba(201,168,76,.11),rgba(201,168,76,.03));border:1px solid rgba(201,168,76,.18);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.snum{position:absolute;top:32px;right:32px;font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;opacity:.65}
+.sc h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text)}
+.sc p{font-size:13.5px;color:var(--text-mid);line-height:1.68;flex:1}
+.sf{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--text-mid)}
+.sf::before{content:'';width:11px;height:1.5px;background:var(--gold);flex-shrink:0}
+.sp{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--text);padding-top:13px;border-top:1px solid #F0F2F5}
+.sp em{font-style:normal;color:var(--gold)}
+.sc.feat{background:var(--navy);border-color:var(--border)}
+.sc.feat::after{content:'MOST POPULAR';position:absolute;top:20px;right:20px;background:var(--gold);color:var(--navy);font-family:'DM Mono',monospace;font-size:8.5px;font-weight:600;letter-spacing:1.5px;padding:3px 9px;border-radius:3px}
+.sc.feat::before{display:none}.sc.feat .snum{display:none}
+.sc.feat h3{color:#fff}.sc.feat p{color:rgba(255,255,255,.5)}
+.sc.feat .sf{color:rgba(255,255,255,.55)}.sc.feat .sp{color:#fff;border-top-color:rgba(255,255,255,.1)}
+/* Process */
+.proc{padding:116px 0;background:var(--navy)}
+.proc-hdr{text-align:center;max-width:580px;margin:0 auto 64px}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+.steps::before{content:'';position:absolute;top:26px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--border),var(--gold),var(--border),transparent);z-index:0}
+.step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 10px;position:relative;z-index:1}
+.stn{width:52px;height:52px;background:var(--navy-mid);border:1.5px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--gold);margin-bottom:20px;transition:background .3s,border-color .3s,transform .3s}
+.step:hover .stn{background:var(--gold);color:var(--navy);border-color:var(--gold);transform:scale(1.1)}
+.stitle{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:8px}
+.sdesc{font-size:12.5px;color:rgba(255,255,255,.42);line-height:1.58}
+.sdays{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-top:8px;opacity:.72}
+/* Results */
+.results{padding:116px 0;background:var(--cream)}
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:64px}
+.rc{background:#fff;border:1px solid #E8EBF0;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:16px;transition:transform .3s var(--ease),box-shadow .3s}
+.rc:hover{transform:translateY(-4px);box-shadow:0 16px 42px rgba(13,27,42,.08)}
+.rb{display:flex;align-items:center;gap:13px;padding-bottom:16px;border-bottom:1px solid #F0F2F5}
+.rico{width:44px;height:44px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.rn{font-family:'Playfair Display',serif;font-size:15.5px;font-weight:700;color:var(--text)}
+.rt{font-size:11.5px;color:var(--text-soft);font-family:'DM Mono',monospace;letter-spacing:.5px}
+.rpkg{margin-left:auto;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.22);color:var(--gold);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 9px;border-radius:3px;white-space:nowrap}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.metric{padding:13px;background:#F7F8FA;border-radius:9px}
+.mn{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:#22A06B;line-height:1}
+.ml2{font-size:11px;color:var(--text-soft);line-height:1.4;margin-top:2px}
+.rq{font-size:13.5px;color:var(--text-mid);line-height:1.74;font-style:italic;padding-top:13px;border-top:1px solid #F0F2F5}
+.rby{font-style:normal;font-weight:600;color:var(--text);margin-top:6px;font-size:12.5px}
+.stat-strip{background:var(--navy);border-radius:20px;padding:52px;display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden;position:relative}
+.stat-strip::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.06),transparent 55%);pointer-events:none}
+.ss{padding:32px 24px;border-right:1px solid var(--border-soft);position:relative;z-index:1}
+.ss:last-child{border-right:none}
+.ssn{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:var(--gold);line-height:1;letter-spacing:-2px}
+.ssd{font-size:13.5px;color:rgba(255,255,255,.46);line-height:1.5;margin-top:7px}
+/* Pricing */
+.pricing{padding:116px 0;background:var(--navy)}
+.pr-hdr{text-align:center;margin-bottom:56px}
+.pr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:960px;margin:0 auto}
+.prc{background:var(--navy-mid);border:1px solid var(--border-soft);border-radius:20px;padding:40px 32px;display:flex;flex-direction:column;gap:20px;position:relative;transition:transform .35s var(--ease),border-color .3s}
+.prc:hover{transform:translateY(-6px);border-color:var(--border)}
+.prc.pop{background:linear-gradient(155deg,var(--navy-light),var(--navy-mid));border-color:var(--border);transform:scale(1.04)}
+.prc.pop:hover{transform:scale(1.04) translateY(-6px)}
+.ptag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-family:'DM Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:1.5px;padding:4px 14px;border-radius:20px;white-space:nowrap}
+.plbl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
+.pname{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#fff;letter-spacing:-.4px}
+.pprice{display:flex;align-items:baseline;gap:4px}
+.pcur{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--gold)}
+.pnum{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:#fff;line-height:1;letter-spacing:-2px}
+.pper{font-size:13px;color:rgba(255,255,255,.36);margin-bottom:3px}
+.pdesc{font-size:13.5px;color:rgba(255,255,255,.48);line-height:1.6}
+.pfeats{display:flex;flex-direction:column;gap:10px;flex:1}
+.pf{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:rgba(255,255,255,.66);line-height:1.4}
+.pchk{width:17px;height:17px;background:rgba(201,168,76,.14);border:1px solid rgba(201,168,76,.28);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:9px;color:var(--gold)}
+.pbtn{display:block;text-align:center;padding:14px;border-radius:9px;font-weight:600;font-size:14px;transition:all .25s;border:1.5px solid rgba(255,255,255,.18);color:#fff}
+.pbtn:hover{border-color:var(--gold);color:var(--gold)}
+.pbtn.gold{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:700;box-shadow:0 8px 26px rgba(201,168,76,.28)}
+.pbtn.gold:hover{background:var(--gold-light)}
+.ret-note{text-align:center;margin:36px auto 0;padding:24px 32px;background:var(--navy-mid);border:1px solid var(--border);border-radius:12px;max-width:560px;font-size:14.5px;color:rgba(255,255,255,.55);line-height:1.68}
+.ret-note strong{color:var(--gold)}
+/* Nashville */
+.nash{padding:116px 0;background:var(--cream)}
+.nash-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.nash-vis{position:relative;background:var(--navy);border-radius:20px;padding:44px;overflow:hidden;min-height:370px;display:flex;flex-direction:column;justify-content:space-between}
+.nash-vis::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.04) 1px,transparent 1px);background-size:38px 38px}
+.nash-sky{position:absolute;bottom:0;left:0;right:0;height:130px;overflow:hidden}
+.nlbl{position:relative;z-index:2;font-family:'Playfair Display',serif;font-size:44px;font-weight:900;color:#fff;letter-spacing:-2px;line-height:1}
+.nsub{position:relative;z-index:2;font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-top:7px}
+.ncnt{position:relative;z-index:2;display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,.13);border:1px solid var(--border);border-radius:7px;padding:8px 13px;font-size:13px;color:#fff;margin-top:18px}
+.ncnt b{color:var(--gold);font-family:'Playfair Display',serif;font-size:16px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.pill{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);color:var(--text);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:4px;transition:background .25s,color .25s}
+.pill:hover{background:var(--gold);color:var(--navy)}
+.segs{display:flex;flex-direction:column;gap:13px;margin-top:30px}
+.seg{display:flex;align-items:center;gap:13px;padding:15px 20px;background:#fff;border:1px solid #E8EBF0;border-radius:11px;transition:transform .25s,border-color .25s}
+.seg:hover{transform:translateX(5px);border-color:rgba(201,168,76,.26)}
+.seg-ico{font-size:19px}
+.seg-info b{display:block;font-size:13.5px;font-weight:600;color:var(--text)}
+.seg-info span{font-size:11.5px;color:var(--text-soft);font-family:'DM Mono',monospace}
+.seg-bar{margin-left:auto;height:4px;width:68px;background:#EEF1F5;border-radius:2px;overflow:hidden}
+.seg-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:2px}
+/* Testimonials */
+.testi{padding:116px 0;background:var(--navy);overflow:hidden}
+.testi-outer{overflow:hidden;margin-top:56px;position:relative}
+.testi-outer::before,.testi-outer::after{content:'';position:absolute;top:0;bottom:0;width:96px;z-index:2;pointer-events:none}
+.testi-outer::before{left:0;background:linear-gradient(90deg,var(--navy),transparent)}
+.testi-outer::after{right:0;background:linear-gradient(270deg,var(--navy),transparent)}
+.ttrack{display:flex;gap:20px;animation:ts 32s linear infinite;width:max-content}
+.ttrack:hover{animation-play-state:paused}
+@keyframes ts{from{transform:none}to{transform:translateX(-50%)}}
+.tc{width:360px;background:var(--navy-mid);border:1px solid var(--border-soft);border-radius:16px;padding:32px;flex-shrink:0;display:flex;flex-direction:column;gap:16px}
+.tstars{color:var(--gold);font-size:13px;letter-spacing:2px}
+.ttext{font-size:14.5px;color:rgba(255,255,255,.7);line-height:1.74;flex:1;font-style:italic}
+.tauth{display:flex;align-items:center;gap:10px;padding-top:13px;border-top:1px solid var(--border-soft)}
+.tav{width:38px;height:38px;background:linear-gradient(135deg,var(--gold),var(--navy-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--navy);flex-shrink:0}
+.taname{display:block;font-size:13.5px;font-weight:600;color:#fff}
+.tarole{font-size:11.5px;color:rgba(255,255,255,.4);font-family:'DM Mono',monospace}
+/* FAQ */
+.faq{padding:116px 0;background:var(--cream)}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.faq-list{display:flex;flex-direction:column}
+.faq-item{border-bottom:1px solid #E8EBF0}
+.fq{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:19px 0;font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--text);background:none;border:none;cursor:pointer;text-align:left}
+.fqi{width:24px;height:24px;border:1.5px solid #D8DBE0;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;color:var(--text-soft);transition:all .3s}
+.fq.open .fqi{background:var(--gold);border-color:var(--gold);color:var(--navy);transform:rotate(180deg)}
+.fa{max-height:0;overflow:hidden;transition:max-height .44s cubic-bezier(.45,0,.15,1)}
+.fai{padding:0 0 18px;font-size:14.5px;color:var(--text-mid);line-height:1.74}
+/* CTA */
+.cta-sec{padding:116px 0;background:var(--navy)}
+.cta-box{background:linear-gradient(140deg,var(--navy-mid),var(--navy-light));border:1px solid var(--border);border-radius:24px;padding:72px;text-align:center;position:relative;overflow:hidden}
+.cta-box::before{content:'';position:absolute;top:-200px;right:-200px;width:480px;height:480px;background:radial-gradient(circle,rgba(201,168,76,.1) 0%,transparent 65%);pointer-events:none}
+.cta-box h2{position:relative;z-index:1}
+.cta-sub{font-size:16.5px;color:rgba(255,255,255,.5);max-width:460px;margin:14px auto 36px;line-height:1.7;position:relative;z-index:1}
+.cta-btns{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;position:relative;z-index:1}
+.trust-row{display:flex;justify-content:center;gap:26px;margin-top:40px;flex-wrap:wrap;position:relative;z-index:1}
+.tr{display:flex;align-items:center;gap:7px;font-size:13px;color:rgba(255,255,255,.45)}
+.trstar{color:var(--gold)}
+/* Contact */
+.contact{padding:116px 0;background:var(--navy-mid)}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.ct-info{display:flex;flex-direction:column;gap:28px}
+.ctd{display:flex;align-items:flex-start;gap:13px}
+.ctdico{width:40px;height:40px;background:rgba(201,168,76,.1);border:1px solid var(--border);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.ctdi b{display:block;font-size:14px;font-weight:600;color:#fff;margin-bottom:2px}
+.ctdi span{font-size:13.5px;color:rgba(255,255,255,.46);line-height:1.5}
+.ctdi a{color:var(--gold-light)}
+.fbox{background:var(--navy);border:1px solid var(--border-soft);border-radius:20px;padding:40px}
+.f2col{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:13px}
+.fg label{font-size:12.5px;font-weight:500;color:rgba(255,255,255,.52)}
+.fg input,.fg select,.fg textarea{background:var(--navy-mid);border:1.5px solid var(--border-soft);border-radius:7px;padding:12px 14px;font-family:'DM Sans',system-ui,sans-serif;font-size:13.5px;color:#fff;outline:none;transition:border-color .25s,background .25s;width:100%}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);background:var(--navy-light)}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,.2)}
+.fg select option{background:var(--navy)}
+.fg textarea{resize:vertical;min-height:108px}
+.fsub{width:100%;padding:16px;background:var(--gold);color:var(--navy);border:none;border-radius:9px;font-family:'DM Sans',system-ui,sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background .25s,transform .2s;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 6px 20px rgba(201,168,76,.28)}
+.fsub:hover{background:var(--gold-light);transform:translateY(-2px)}
+.fsuccess{display:none;text-align:center;padding:30px;background:rgba(34,160,107,.1);border:1px solid rgba(34,160,107,.28);border-radius:11px;color:#22A06B;font-size:15px;font-weight:600;margin-top:14px}
+/* Footer */
+footer{background:var(--navy);border-top:1px solid var(--border-soft);padding:66px 0 30px}
+.ft-inner{max-width:1280px;margin:0 auto;padding:0 6%}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.ft-brand{display:flex;flex-direction:column;gap:16px}
+.ft-brand p{font-size:13.5px;color:rgba(255,255,255,.36);line-height:1.7;max-width:260px}
+.ft-col h4{font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:17px}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.ft-links a{font-size:13.5px;color:rgba(255,255,255,.4);transition:color .25s}
+.ft-links a:hover{color:var(--gold)}
+.ft-bottom{padding-top:24px;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.ft-bottom p{font-size:12.5px;color:rgba(255,255,255,.26)}
+.ft-legal{list-style:none;display:flex;gap:20px}
+.ft-legal a{font-size:12.5px;color:rgba(255,255,255,.26);transition:color .25s}
+.ft-legal a:hover{color:var(--gold)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:3px}
+@media(max-width:1024px){.grid3{grid-template-columns:1fr 1fr}.steps{grid-template-columns:repeat(3,1fr)}.steps::before{display:none}.stat-strip{grid-template-columns:1fr 1fr}.ss{border-right:none;border-bottom:1px solid var(--border-soft)}.ss:nth-child(3),.ss:last-child{border-bottom:none}.ft-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){nav{padding:0 5%}.nav-links{display:none}.ham{display:flex}.mob{display:flex}.hero{padding:96px 5% 110px}.hero-bar{display:none}.ab-grid,.res-grid,.nash-grid,.pr-grid,.faq-grid,.ct-grid{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.stat-strip{padding:32px}.f2col{grid-template-columns:1fr}.svcs-hdr{flex-direction:column;align-items:flex-start;gap:20px}.cta-box{padding:44px 24px}.prc.pop{transform:none}.prc.pop:hover{transform:translateY(-6px)}.ft-grid{grid-template-columns:1fr;gap:28px}.flt1,.flt2{display:none}.nash-vis{min-height:230px;padding:30px}}
+@media(max-width:480px){.steps{grid-template-columns:1fr}.hero-btns,.cta-btns{flex-direction:column;align-items:flex-start}.stat-strip{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to main content</a>
+<div id="dot" aria-hidden="true"></div>
+<div id="ring" aria-hidden="true"></div>
+<nav id="nav" aria-label="Main navigation">
+  <a href="#" class="logo" aria-label="Elevate Digital Group home">
+    <div class="logo-mark" aria-hidden="true">E</div>
+    <div><span class="logo-name">Elevate Digital Group</span><span class="logo-city">Nashville, TN</span></div>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact" class="nav-cta">Free Audit →</a></li>
+  </ul>
+  <button class="ham" id="ham" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob" id="mob" aria-label="Mobile menu">
+  <a href="#services">Services</a><a href="#process">Process</a><a href="#results">Results</a>
+  <a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
+  <a href="#contact" style="color:var(--gold)">Free Audit →</a>
+</div>
+<main id="main">
+<!-- HERO -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg" aria-hidden="true"><div class="grid-lines"></div><div class="glow1"></div><div class="glow2"></div><div class="diag"></div><div class="diag"></div><div class="diag"></div></div>
+  <div class="hero-inner wrap">
+    <p class="eyebrow">Nashville, Tennessee</p>
+    <h1>Your Website<br>Should <em>Win</em><br>Customers.</h1>
+    <p class="hero-sub">We rebuild Nashville's local businesses with modern, fast, conversion-focused websites — designed to rank higher, load faster, and turn visitors into paying customers.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-g">Get Your Free Website Audit →</a>
+      <a href="#results" class="btn-t">See real results ↓</a>
+    </div>
+  </div>
+  <div class="hero-bar" aria-label="Statistics">
+    <div class="hstat"><div class="hstat-n">38K+</div><div class="hstat-l">Nashville small businesses ready for a modern presence</div></div>
+    <div class="hstat"><div class="hstat-n">28 days</div><div class="hstat-l">Average time from kickoff to live, optimized website</div></div>
+    <div class="hstat"><div class="hstat-n">3.2×</div><div class="hstat-l">Average lead increase within 90 days of launch</div></div>
+    <div class="hstat"><div class="hstat-n">100%</div><div class="hstat-l">Nashville-based — we know this market inside and out</div></div>
+  </div>
+</section>
+<!-- MARQUEE -->
+<div class="mq" aria-hidden="true"><div class="mq-in"><span class="mq-i">Website Redesign</span><span class="mq-i">Local SEO</span><span class="mq-i">Mobile Optimization</span><span class="mq-i">ADA Compliance</span><span class="mq-i">E-Commerce</span><span class="mq-i">Google Rankings</span><span class="mq-i">Lead Generation</span><span class="mq-i">Core Web Vitals</span><span class="mq-i">Page Speed</span><span class="mq-i">Brand Identity</span><span class="mq-i">Nashville Businesses</span><span class="mq-i">Conversion Optimization</span><span class="mq-i">Website Redesign</span><span class="mq-i">Local SEO</span><span class="mq-i">Mobile Optimization</span><span class="mq-i">ADA Compliance</span><span class="mq-i">E-Commerce</span><span class="mq-i">Google Rankings</span><span class="mq-i">Lead Generation</span><span class="mq-i">Core Web Vitals</span><span class="mq-i">Page Speed</span><span class="mq-i">Brand Identity</span><span class="mq-i">Nashville Businesses</span><span class="mq-i">Conversion Optimization</span></div></div>
+<!-- ABOUT -->
+<section class="about" id="about" aria-label="The problem">
+  <div class="wrap"><div class="ab-grid">
+    <div class="mockup-wrap rl">
+      <div class="flt flt1" aria-hidden="true"><div class="flt-n">0.8s</div><div class="flt-l">Load Time</div></div>
+      <div class="mockup"><div class="mbar" aria-hidden="true"><div class="wd r"></div><div class="wd y"></div><div class="wd g"></div><div class="url">your-nashville-business.com</div></div><div class="mbody"><div class="mhero">Elevated. Modern. Fast.</div><div class="mrow"><div class="mc"></div><div class="mc"></div><div class="mc"></div></div><div class="ml" style="width:74%"></div><div class="ml s"></div><div class="ml gd"></div></div></div>
+      <div class="score" aria-label="Score 98"><span class="sn">98</span><span class="sl">SCORE</span></div>
+      <div class="flt flt2" aria-hidden="true"><div class="flt-n">+340%</div><div class="flt-l">Organic Traffic</div></div>
+    </div>
+    <div class="rv">
+      <div class="tag">The Problem</div>
+      <h2 class="big">Most Nashville business<br>websites are <em>costing you money.</em></h2>
+      <p class="lead">Nashville's scene is booming — but outdated websites quietly send customers to competitors with modern digital presences every single day.</p>
+      <div class="prob-list" role="list">
+        <div class="pi" role="listitem"><div class="pico" aria-hidden="true">🐢</div><div class="pt"><b>Slow loading kills conversions</b><span>53% of mobile visitors abandon sites that take more than 3 seconds. Most Nashville SMB sites take 6–12 seconds.</span></div></div>
+        <div class="pi" role="listitem"><div class="pico" aria-hidden="true">📱</div><div class="pt"><b>Not built for mobile search</b><span>Over 70% of local searches happen on phones. Outdated sites look broken and get penalized by Google.</span></div></div>
+        <div class="pi" role="listitem"><div class="pico" aria-hidden="true">🔍</div><div class="pt"><b>Invisible in local search</b><span>Without local SEO, you don't appear when customers search "near me." Your competitor does — even if you're better.</span></div></div>
+        <div class="pi" role="listitem"><div class="pico" aria-hidden="true">♿</div><div class="pt"><b>ADA compliance exposure</b><span>Non-compliant sites face growing legal risk. Fixing them also improves SEO and serves every customer better.</span></div></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+<!-- SERVICES -->
+<section class="svcs" id="services" aria-label="Services">
+  <div class="wrap">
+    <div class="svcs-hdr"><div class="rv"><div class="tag">What We Do</div><h2 class="big dk">Services built for<br><em>Nashville businesses.</em></h2></div><div class="rv d2"><a href="#pricing" class="btn-g" style="background:var(--navy);color:#fff;box-shadow:none">View pricing →</a></div></div>
+    <div class="grid3">
+      <article class="sc rv d1"><span class="snum" aria-hidden="true">01</span><div class="sico" aria-hidden="true">🖥️</div><h3>The Refresh</h3><p>Mobile-first modernization of your existing site — performance-optimized, SEO-ready, and professionally polished without starting from scratch.</p><div style="display:flex;flex-direction:column;gap:6px"><div class="sf">Mobile-first redesign (up to 5 pages)</div><div class="sf">Core Web Vitals optimization</div><div class="sf">On-page SEO &amp; Google Business setup</div><div class="sf">3-week turnaround</div></div><div class="sp">Starting at <em>$1,500</em></div></article>
+      <article class="sc feat rv d2"><div class="sico" aria-hidden="true">⚡</div><h3>The Overhaul</h3><p>A full custom rebuild — new design, powerful structure, and a digital foundation that drives rankings and converts visitors into customers.</p><div style="display:flex;flex-direction:column;gap:6px"><div class="sf">Custom design &amp; development (10 pages)</div><div class="sf">E-commerce or booking integration</div><div class="sf">Full local SEO foundation</div><div class="sf">ADA/WCAG 2.1 compliance</div><div class="sf">CMS training + 90-day support</div></div><div class="sp">Starting at <em>$3,500</em></div></article>
+      <article class="sc rv d3"><span class="snum" aria-hidden="true">03</span><div class="sico" aria-hidden="true">🏆</div><h3>The Authority</h3><p>For established Nashville businesses competing at the highest level — best-in-class design, full content strategy, and a dominant local search presence.</p><div style="display:flex;flex-direction:column;gap:6px"><div class="sf">Custom UI/UX with wireframe reviews</div><div class="sf">Full copywriting for all pages</div><div class="sf">Advanced schema &amp; rich results</div><div class="sf">6-month post-launch support</div></div><div class="sp">Starting at <em>$7,500</em></div></article>
+      <article class="sc rv d1"><span class="snum" aria-hidden="true">04</span><div class="sico" aria-hidden="true">📈</div><h3>Monthly Retainer</h3><p>Ongoing hosting, maintenance, content updates, and local SEO management to keep your site performing long after launch day.</p><div style="display:flex;flex-direction:column;gap:6px"><div class="sf">Hosting &amp; security monitoring</div><div class="sf">Monthly performance reports</div><div class="sf">Content &amp; SEO updates</div><div class="sf">Priority support</div></div><div class="sp">From <em>$199/month</em></div></article>
+      <article class="sc rv d2"><span class="snum" aria-hidden="true">05</span><div class="sico" aria-hidden="true">🛒</div><h3>E-Commerce Setup</h3><p>Turn your Nashville shop into an online store — Shopify or WooCommerce, product catalog, payments, and mobile checkout optimization.</p><div style="display:flex;flex-direction:column;gap:6px"><div class="sf">Shopify or WooCommerce build</div><div class="sf">Product catalog migration</div><div class="sf">Payment gateway integration</div><div class="sf">Inventory management setup</div></div><div class="sp">Starting at <em>$1,500</em></div></article>
+      <article class="sc rv d3"><span class="snum" aria-hidden="true">06</span><div class="sico" aria-hidden="true">⭐</div><h3>Local SEO &amp; Reputation</h3><p>Dominate Nashville's local search — Google Business optimization, citation building, review strategy, and competitor monitoring.</p><div style="display:flex;flex-direction:column;gap:6px"><div class="sf">Google Business Profile optimization</div><div class="sf">Local citation building</div><div class="sf">Review generation campaigns</div><div class="sf">Monthly rankings reporting</div></div><div class="sp">From <em>$350/month</em></div></article>
+    </div>
+  </div>
+</section>
+<!-- PROCESS -->
+<section class="proc" id="process" aria-label="Process">
+  <div class="wrap">
+    <div class="proc-hdr rv"><div class="tag">How It Works</div><h2 class="big">From signed contract to<br><em>live website in 28 days.</em></h2></div>
+    <div class="steps" role="list">
+      <div class="step rv d1" role="listitem"><div class="stn" aria-hidden="true">1</div><div class="stitle">Discovery</div><p class="sdesc">We learn your business, goals, competitors, and brand so every decision is intentional.</p><div class="sdays">Days 1–3</div></div>
+      <div class="step rv d2" role="listitem"><div class="stn" aria-hidden="true">2</div><div class="stitle">Strategy</div><p class="sdesc">Sitemap, page structure, and content architecture mapped before a pixel is placed.</p><div class="sdays">Days 4–7</div></div>
+      <div class="step rv d3" role="listitem"><div class="stn" aria-hidden="true">3</div><div class="stitle">Design</div><p class="sdesc">Full visual mockups in Figma — desktop and mobile — with client review rounds.</p><div class="sdays">Days 8–14</div></div>
+      <div class="step rv d4" role="listitem"><div class="stn" aria-hidden="true">4</div><div class="stitle">Build &amp; Test</div><p class="sdesc">Development, content entry, speed audits, and cross-browser QA testing.</p><div class="sdays">Days 15–22</div></div>
+      <div class="step rv d5" role="listitem"><div class="stn" aria-hidden="true">5</div><div class="stitle">Launch</div><p class="sdesc">Go live, Search Console setup, client training, and retainer onboarding.</p><div class="sdays">Days 23–28</div></div>
+    </div>
+  </div>
+</section>
+<!-- RESULTS -->
+<section class="results" id="results" aria-label="Results">
+  <div class="wrap">
+    <div class="rv" style="margin-bottom:52px"><div class="tag">Real Results</div><h2 class="big dk">What happens when Nashville<br>businesses get <em>elevated.</em></h2></div>
+    <div class="res-grid">
+      <article class="rc rv d1"><div class="rb"><div class="rico" aria-hidden="true">🍽️</div><div><div class="rn">The Gulch Grille</div><div class="rt">Restaurant · Nashville, TN</div></div><span class="rpkg">Overhaul</span></div><div class="metrics"><div class="metric"><div class="mn">+312%</div><div class="ml2">Organic traffic (90 days)</div></div><div class="metric"><div class="mn">0.9s</div><div class="ml2">Load time (was 8.4s)</div></div><div class="metric"><div class="mn">+67%</div><div class="ml2">Online reservations</div></div></div><div class="rq">"We went from page 4 to top 3 for 'Nashville brunch' in 6 weeks. The site looks like the restaurant we actually are."<div class="rby">— Marcus T., Owner</div></div></article>
+      <article class="rc rv d2"><div class="rb"><div class="rico" aria-hidden="true">⚖️</div><div><div class="rn">Weston &amp; Cole Law</div><div class="rt">Legal Services · Brentwood, TN</div></div><span class="rpkg">Authority</span></div><div class="metrics"><div class="metric"><div class="mn">+228%</div><div class="ml2">Contact form submissions</div></div><div class="metric"><div class="mn">#1</div><div class="ml2">Google for 3 key terms</div></div><div class="metric"><div class="mn">98</div><div class="ml2">PageSpeed score (was 34)</div></div></div><div class="rq">"Our old site was costing us clients. Elevate rebuilt everything in 4 weeks. We're ranking above firms with 10× our marketing budget."<div class="rby">— Jennifer C., Partner</div></div></article>
+      <article class="rc rv d1"><div class="rb"><div class="rico" aria-hidden="true">🛍️</div><div><div class="rn">East Side Threads</div><div class="rt">Retail Boutique · East Nashville</div></div><span class="rpkg">Overhaul + E-Comm</span></div><div class="metrics"><div class="metric"><div class="mn">$42K</div><div class="ml2">Online revenue, first quarter</div></div><div class="metric"><div class="mn">+189%</div><div class="ml2">Instagram-to-web traffic</div></div><div class="metric"><div class="mn">3.8%</div><div class="ml2">Conversion rate (was 0.4%)</div></div></div><div class="rq">"I had 14K Instagram followers and almost zero online sales. Elevate built a store that actually converts. First month blew every projection."<div class="rby">— Priya K., Founder</div></div></article>
+      <article class="rc rv d2"><div class="rb"><div class="rico" aria-hidden="true">🔧</div><div><div class="rn">Nashville Pro HVAC</div><div class="rt">Home Services · Nashville, TN</div></div><span class="rpkg">Refresh</span></div><div class="metrics"><div class="metric"><div class="mn">+445%</div><div class="ml2">Lead form submissions</div></div><div class="metric"><div class="mn">#2</div><div class="ml2">"HVAC Nashville" ranking</div></div><div class="metric"><div class="mn">4.8★</div><div class="ml2">Google rating (was 3.2)</div></div></div><div class="rq">"Within 60 days we had more inbound leads than we could handle. Had to hire two new technicians. Best investment in 11 years of business."<div class="rby">— Derek H., Owner</div></div></article>
+    </div>
+    <div class="stat-strip rv">
+      <div class="ss"><div class="ssn">50+</div><div class="ssd">Nashville businesses elevated and thriving</div></div>
+      <div class="ss"><div class="ssn">98</div><div class="ssd">Average Google PageSpeed score on delivery</div></div>
+      <div class="ss"><div class="ssn">3.2×</div><div class="ssd">Average lead increase within 90 days of launch</div></div>
+      <div class="ss"><div class="ssn">28d</div><div class="ssd">Average delivery time from kickoff to live site</div></div>
+    </div>
+  </div>
+</section>
+<!-- PRICING -->
+<section class="pricing" id="pricing" aria-label="Pricing">
+  <div class="wrap">
+    <div class="pr-hdr rv"><div class="tag" style="justify-content:center">Pricing</div><h2 class="big" style="text-align:center">Transparent pricing.<br><em>No surprises.</em></h2><p class="lead" style="text-align:center;margin:14px auto 0">Fixed-price packages so you know exactly what you're getting before you sign anything.</p></div>
+    <div class="pr-grid">
+      <div class="prc rv d1"><div class="plbl">Starter</div><div class="pname">The Refresh</div><div class="pprice"><span class="pcur">$</span><span class="pnum">1,500</span></div><div class="pper">one-time · starting price</div><div class="pdesc">Mobile-first modernization of your existing site. Perfect for businesses that need an upgrade, not a full rebuild.</div><div class="pfeats"><div class="pf"><span class="pchk" aria-hidden="true">✓</span>Mobile-first redesign (up to 5 pages)</div><div class="pf"><span class="pchk" aria-hidden="true">✓</span>Core Web Vitals optimization</div><div class="pf"><span class="pchk" aria-hidden="true">✓</span>On-page SEO foundation</div><div class="pf"><span class="pchk" aria-hidden="true">✓</span>Google Business optimization</div><div class="pf"><span class="pchk" aria-hidden="true">✓</span>3-week delivery</div></div><a href="#contact" class="pbtn">Get started</a></div>
+      <div class="prc pop rv d2"><div class="ptag">Most Popular</div><div class="plbl">Best Value</div><div class="pname">The Overhaul</div><div class="pprice"><span class="pcur">$</span><span class="pnum">3,500</span></div><div class="pper">one-time · starting price</div><div class="pdesc">Full custom rebuild — new design, new structure, and a powerful foundation that drives rankings and converts visitors.</div><div class="pfeats"><div class="pf"><span class="pchk" aria-hidden="true">✓</span>Custom design &amp; development (10 pages)</div><div class="pf"><span class="pchk" aria-hidden="true">✓</span>E-commerce or booking integration</div><div class="pf"><span class="pchk" aria-hidden="true">✓</span>Full local SEO foundation</div><div class="pf"><span class="pchk" aria-hidden="true">✓</span>ADA/WCAG 2.1 compliance</div><div class="pf"><span class="pchk" aria-hidden="true">✓</span>CMS training + 90-day support</div><div class="pf"><span class="pchk" aria-hidden="true">✓</span>4-week delivery</div></div><a href="#contact" class="pbtn gold">Get started</a></div>
+      <div class="prc rv d3"><div class="plbl">Premium</div><div class="pname">The Authority</div><div class="pprice"><span class="pcur">$</span><span class="pnum">7,500</span></div><div class="pper">one-time · starting price</div><div class="pdesc">For established businesses that need a best-in-class digital presence that reflects their market position.</div><div class="pfeats"><div class="pf"><span class="pchk" aria-hidden="true">✓</span>Custom UI/UX with wireframe reviews</div><div class="pf"><span class="pchk" aria-hidden="true">✓</span>Full copywriting for all pages</div><div class="pf"><span class="pchk" aria-hidden="true">✓</span>Advanced schema &amp; rich results</div><div class="pf"><span class="pchk" aria-hidden="true">✓</span>CRM &amp; scheduling integrations</div><div class="pf"><span class="pchk" aria-hidden="true">✓</span>6-month post-launch support</div></div><a href="#contact" class="pbtn">Get started</a></div>
+    </div>
+    <div class="ret-note rv">All packages can be paired with our <strong>Monthly Retainer plans from $199/mo</strong> — hosting, security, content updates, SEO, and monthly reporting. Ask about bundled pricing.</div>
+  </div>
+</section>
+<!-- NASHVILLE -->
+<section class="nash" id="nashville" aria-label="Nashville">
+  <div class="wrap"><div class="nash-grid">
+    <div class="rl rv">
+      <div class="nash-vis">
+        <div class="nash-sky" aria-hidden="true"><svg viewBox="0 0 800 130" preserveAspectRatio="none" fill="none"><rect x="40" y="30" width="30" height="100" fill="rgba(255,255,255,0.04)"/><rect x="80" y="10" width="40" height="120" fill="rgba(255,255,255,0.05)"/><rect x="130" y="40" width="25" height="90" fill="rgba(255,255,255,0.04)"/><rect x="165" y="18" width="35" height="112" fill="rgba(255,255,255,0.055)"/><rect x="210" y="48" width="50" height="82" fill="rgba(255,255,255,0.04)"/><rect x="270" y="5" width="20" height="125" fill="rgba(255,255,255,0.065)"/><rect x="300" y="22" width="30" height="108" fill="rgba(255,255,255,0.05)"/><rect x="370" y="14" width="18" height="116" fill="rgba(255,255,255,0.055)"/><rect x="398" y="0" width="8" height="130" fill="rgba(255,255,255,0.07)"/><rect x="415" y="20" width="28" height="110" fill="rgba(255,255,255,0.05)"/><rect x="453" y="36" width="34" height="94" fill="rgba(255,255,255,0.04)"/><rect x="497" y="16" width="26" height="114" fill="rgba(255,255,255,0.055)"/><rect x="533" y="42" width="40" height="88" fill="rgba(255,255,255,0.04)"/><rect x="583" y="26" width="22" height="104" fill="rgba(255,255,255,0.05)"/><rect x="655" y="14" width="35" height="116" fill="rgba(255,255,255,0.055)"/><rect x="700" y="46" width="28" height="84" fill="rgba(255,255,255,0.04)"/><rect x="738" y="30" width="40" height="100" fill="rgba(255,255,255,0.05)"/></svg></div>
+        <div class="nlbl">Nashville</div>
+        <div class="nsub">Music City · Tennessee</div>
+        <div class="ncnt"><b>38K+</b> businesses · <b>14.5M</b> annual visitors</div>
+      </div>
+    </div>
+    <div class="rv">
+      <div class="tag">Our Market</div>
+      <h2 class="big dk">We live here.<br>We <em>know</em> Nashville.</h2>
+      <p class="lead dk">We're not a remote agency guessing at what Nashville businesses need. We're embedded in the community — attending Chamber events, working with local entrepreneurs, and competing in the same market you are.</p>
+      <div class="pills" role="list" aria-label="Neighborhoods served"><span class="pill" role="listitem">East Nashville</span><span class="pill" role="listitem">The Gulch</span><span class="pill" role="listitem">12 South</span><span class="pill" role="listitem">Germantown</span><span class="pill" role="listitem">Brentwood</span><span class="pill" role="listitem">Franklin</span><span class="pill" role="listitem">Midtown</span><span class="pill" role="listitem">Green Hills</span><span class="pill" role="listitem">Nolensville</span><span class="pill" role="listitem">Murfreesboro</span></div>
+      <div class="segs"><div class="seg"><span class="seg-ico" aria-hidden="true">🍔</span><div class="seg-info"><b>Restaurants &amp; Hospitality</b><span>~4,000 businesses in metro Nashville</span></div><div class="seg-bar"><div class="seg-fill" style="width:95%"></div></div></div><div class="seg"><span class="seg-ico" aria-hidden="true">⚖️</span><div class="seg-info"><b>Professional Services</b><span>~8,000 firms across the metro area</span></div><div class="seg-bar"><div class="seg-fill" style="width:80%"></div></div></div><div class="seg"><span class="seg-ico" aria-hidden="true">🛍️</span><div class="seg-info"><b>Retail &amp; Boutiques</b><span>~3,500 independent retail businesses</span></div><div class="seg-bar"><div class="seg-fill" style="width:70%"></div></div></div><div class="seg"><span class="seg-ico" aria-hidden="true">🔧</span><div class="seg-info"><b>Home Services</b><span>~6,000 service businesses metro-wide</span></div><div class="seg-bar"><div class="seg-fill" style="width:85%"></div></div></div></div>
+    </div>
+  </div></div>
+</section>
+<!-- TESTIMONIALS -->
+<section class="testi" id="testimonials" aria-label="Testimonials">
+  <div class="wrap" style="padding-bottom:0"><div class="rv"><div class="tag">Client Love</div><h2 class="big">What Nashville businesses<br>are <em>saying.</em></h2></div></div>
+  <div class="testi-outer">
+    <div class="ttrack" role="list">
+      <div class="tc" role="listitem"><div class="tstars" aria-label="5 stars">★★★★★</div><p class="ttext">"We went from page 4 to top 3 results for 'Nashville brunch' in 6 weeks. The site actually reflects the quality of our food. Reservations doubled."</p><div class="tauth"><div class="tav" aria-hidden="true">M</div><div><span class="taname">Marcus T.</span><span class="tarole">The Gulch Grille · Owner</span></div></div></div>
+      <div class="tc" role="listitem"><div class="tstars" aria-label="5 stars">★★★★★</div><p class="ttext">"Our old site was costing us clients and we didn't know it. Elevate rebuilt everything in 4 weeks. We're ranking above firms with 10× our marketing budget."</p><div class="tauth"><div class="tav" aria-hidden="true">J</div><div><span class="taname">Jennifer C.</span><span class="tarole">Weston &amp; Cole Law · Partner</span></div></div></div>
+      <div class="tc" role="listitem"><div class="tstars" aria-label="5 stars">★★★★★</div><p class="ttext">"I had 14K Instagram followers and almost zero online sales. Elevate built a store that actually converts. First month blew every projection I made."</p><div class="tauth"><div class="tav" aria-hidden="true">P</div><div><span class="taname">Priya K.</span><span class="tarole">East Side Threads · Founder</span></div></div></div>
+      <div class="tc" role="listitem"><div class="tstars" aria-label="5 stars">★★★★★</div><p class="ttext">"Within 60 days we had more inbound leads than we could handle. Had to hire two new technicians. Best investment we've made in 11 years of business."</p><div class="tauth"><div class="tav" aria-hidden="true">D</div><div><span class="taname">Derek H.</span><span class="tarole">Nashville Pro HVAC · Owner</span></div></div></div>
+      <div class="tc" role="listitem"><div class="tstars" aria-label="5 stars">★★★★★</div><p class="ttext">"The 28-day timeline seemed impossible. They hit it with days to spare. Every phase was transparent and on-time. I've referred 4 business owners already."</p><div class="tauth"><div class="tav" aria-hidden="true">S</div><div><span class="taname">Sarah M.</span><span class="tarole">Midtown Med Spa · Director</span></div></div></div>
+      <div class="tc" role="listitem"><div class="tstars" aria-label="5 stars">★★★★★</div><p class="ttext">"ADA compliance was a liability we kept ignoring. Elevate handled the audit and remediation while rebuilding the entire site. Zero compromises made."</p><div class="tauth"><div class="tav" aria-hidden="true">R</div><div><span class="taname">Robert A.</span><span class="tarole">Amari Dental · Owner</span></div></div></div>
+      <!-- Duplicate set for infinite scroll -->
+      <div class="tc" aria-hidden="true"><div class="tstars">★★★★★</div><p class="ttext">"We went from page 4 to top 3 results for 'Nashville brunch' in 6 weeks. The site actually reflects the quality of our food. Reservations doubled."</p><div class="tauth"><div class="tav">M</div><div><span class="taname">Marcus T.</span><span class="tarole">The Gulch Grille · Owner</span></div></div></div>
+      <div class="tc" aria-hidden="true"><div class="tstars">★★★★★</div><p class="ttext">"Our old site was costing us clients and we didn't know it. Elevate rebuilt everything in 4 weeks. We're ranking above firms with 10× our marketing budget."</p><div class="tauth"><div class="tav">J</div><div><span class="taname">Jennifer C.</span><span class="tarole">Weston &amp; Cole Law · Partner</span></div></div></div>
+      <div class="tc" aria-hidden="true"><div class="tstars">★★★★★</div><p class="ttext">"I had 14K Instagram followers and almost zero online sales. Elevate built a store that actually converts. First month blew every projection."</p><div class="tauth"><div class="tav">P</div><div><span class="taname">Priya K.</span><span class="tarole">East Side Threads · Founder</span></div></div></div>
+      <div class="tc" aria-hidden="true"><div class="tstars">★★★★★</div><p class="ttext">"Within 60 days we had more inbound leads than we could handle. Had to hire two new technicians. Best investment in 11 years of business."</p><div class="tauth"><div class="tav">D</div><div><span class="taname">Derek H.</span><span class="tarole">Nashville Pro HVAC · Owner</span></div></div></div>
+      <div class="tc" aria-hidden="true"><div class="tstars">★★★★★</div><p class="ttext">"The 28-day timeline seemed impossible. They hit it with days to spare. Every phase was transparent and on-time. I've referred 4 business owners."</p><div class="tauth"><div class="tav">S</div><div><span class="taname">Sarah M.</span><span class="tarole">Midtown Med Spa · Director</span></div></div></div>
+      <div class="tc" aria-hidden="true"><div class="tstars">★★★★★</div><p class="ttext">"ADA compliance was a liability we kept ignoring. Elevate handled the audit and remediation while rebuilding the entire site. Zero compromises."</p><div class="tauth"><div class="tav">R</div><div><span class="taname">Robert A.</span><span class="tarole">Amari Dental · Owner</span></div></div></div>
+    </div>
+  </div>
+</section>
+<!-- FAQ -->
+<section class="faq" id="faq" aria-label="FAQ">
+  <div class="wrap"><div class="faq-grid">
+    <div class="rv">
+      <div class="tag">FAQ</div>
+      <h2 class="big dk">Everything you<br>want to <em>know.</em></h2>
+      <p class="lead dk" style="margin-top:16px">Can't find your answer? We respond to every inquiry within one business day.</p>
+      <a href="#contact" class="btn-g" style="margin-top:32px;display:inline-flex">Ask us directly →</a>
+    </div>
+    <div class="faq-list rv d2" role="list">
+      <div class="faq-item" role="listitem"><button class="fq" aria-expanded="false" aria-controls="fa1">How long does a project take? <span class="fqi" aria-hidden="true">▼</span></button><div class="fa" id="fa1"><div class="fai">Most projects deliver in 3–4 weeks. The Refresh takes ~3 weeks, The Overhaul 4 weeks, and The Authority 5–6 weeks depending on content complexity. Your timeline is written into your contract.</div></div></div>
+      <div class="faq-item" role="listitem"><button class="fq" aria-expanded="false" aria-controls="fa2">Do I need to provide content and photos? <span class="fqi" aria-hidden="true">▼</span></button><div class="fa" id="fa2"><div class="fai">For Refresh and Overhaul packages we work with your existing content and photos. The Authority includes professional copywriting. We can also recommend Nashville-based photographers and art-direct a shoot as an add-on.</div></div></div>
+      <div class="faq-item" role="listitem"><button class="fq" aria-expanded="false" aria-controls="fa3">Can I update my own website? <span class="fqi" aria-hidden="true">▼</span></button><div class="fa" id="fa3"><div class="fai">Yes. Every project includes a CMS training session so you can update text, images, and content yourself. We build on WordPress or Webflow — both have intuitive editing interfaces. Or let our retainer plan handle all updates for you.</div></div></div>
+      <div class="faq-item" role="listitem"><button class="fq" aria-expanded="false" aria-controls="fa4">What does the free audit include? <span class="fqi" aria-hidden="true">▼</span></button><div class="fa" id="fa4"><div class="fai">We run a full technical analysis: PageSpeed scores, Core Web Vitals, mobile usability, SEO fundamentals, ADA compliance, and competitor comparison. We present findings in a 30-minute call with specific issues and their revenue impact. No pitch, no pressure.</div></div></div>
+      <div class="faq-item" role="listitem"><button class="fq" aria-expanded="false" aria-controls="fa5">Do you offer payment plans? <span class="fqi" aria-hidden="true">▼</span></button><div class="fa" id="fa5"><div class="fai">Standard payment is 50% upfront and 50% on launch. For projects over $5,000 we can structure a 3-payment plan. We accept all major credit cards, ACH, and check. Ask us when you receive your proposal.</div></div></div>
+      <div class="faq-item" role="listitem"><button class="fq" aria-expanded="false" aria-controls="fa6">What platforms do you build on? <span class="fqi" aria-hidden="true">▼</span></button><div class="fa" id="fa6"><div class="fai">WordPress with Elementor Pro or Oxygen for most small business projects, Webflow for design-forward builds where self-management isn't needed, and Shopify for all e-commerce projects. We recommend the platform that's right for your specific needs, budget, and long-term plans.</div></div></div>
+      <div class="faq-item" role="listitem"><button class="fq" aria-expanded="false" aria-controls="fa7">Do you work with businesses outside Nashville? <span class="fqi" aria-hidden="true">▼</span></button><div class="fa" id="fa7"><div class="fai">Our primary focus is Nashville and greater Middle Tennessee — that's where our local knowledge creates the most value. We do take on select projects from other markets. Reach out and we'll let you know if it's a good fit.</div></div></div>
+    </div>
+  </div></div>
+</section>
+<!-- CTA -->
+<section class="cta-sec" aria-label="Call to action">
+  <div class="wrap">
+    <div class="cta-box rv">
+      <div class="tag" style="justify-content:center">Ready to Elevate?</div>
+      <h2 class="big" style="text-align:center">Your next customer is<br>searching right now.<br><em>Will they find you?</em></h2>
+      <p class="cta-sub">Get a free, no-obligation website audit. We'll show you exactly what's holding your site back and what it's costing you.</p>
+      <div class="cta-btns">
+        <a href="#contact" class="btn-g">Get My Free Audit →</a>
+        <a href="tel:+16155550100" class="btn-t" style="color:#fff;border-color:rgba(255,255,255,.28)">Call (615) 555-0100</a>
+      </div>
+      <div class="trust-row">
+        <div class="tr"><span class="trstar">★</span> Free, no-obligation audit</div>
+        <div class="tr"><span class="trstar">★</span> Response within 1 business day</div>
+        <div class="tr"><span class="trstar">★</span> Nashville-based team</div>
+        <div class="tr"><span class="trstar">★</span> 50+ businesses elevated</div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- CONTACT -->
+<section class="contact" id="contact" aria-label="Contact">
+  <div class="wrap"><div class="ct-grid">
+    <div class="ct-info rv">
+      <div><div class="tag">Get In Touch</div><h2 class="big">Let's talk about<br>your <em>website.</em></h2><p class="lead" style="margin-top:16px">Start with a free audit. We'll review your current site, show you what's costing you customers, and walk through the right package for your business.</p></div>
+      <div class="ctd"><div class="ctdico" aria-hidden="true">📍</div><div class="ctdi"><b>Location</b><span>Nashville, Tennessee<br>Serving all of Middle Tennessee</span></div></div>
+      <div class="ctd"><div class="ctdico" aria-hidden="true">📞</div><div class="ctdi"><b>Phone</b><span><a href="tel:+16155550100">(615) 555-0100</a></span></div></div>
+      <div class="ctd"><div class="ctdico" aria-hidden="true">✉️</div><div class="ctdi"><b>Email</b><span><a href="mailto:hello@elevatedigitalgroup.com">hello@elevatedigitalgroup.com</a></span></div></div>
+      <div class="ctd"><div class="ctdico" aria-hidden="true">🕐</div><div class="ctdi"><b>Response Time</b><span>We respond to every inquiry<br>within 1 business day</span></div></div>
+    </div>
+    <div class="rv d2">
+      <div class="fbox">
+        <form id="cform" novalidate aria-label="Contact form">
+          <div class="f2col">
+            <div class="fg"><label for="fname">First Name *</label><input type="text" id="fname" name="fname" placeholder="John" required autocomplete="given-name"></div>
+            <div class="fg"><label for="lname">Last Name *</label><input type="text" id="lname" name="lname" placeholder="Smith" required autocomplete="family-name"></div>
+          </div>
+          <div class="fg"><label for="email">Email Address *</label><input type="email" id="email" name="email" placeholder="john@yourbusiness.com" required autocomplete="email"></div>
+          <div class="fg"><label for="phone">Phone Number</label><input type="tel" id="phone" name="phone" placeholder="(615) 555-0000" autocomplete="tel"></div>
+          <div class="fg"><label for="biz">Business Name *</label><input type="text" id="biz" name="biz" placeholder="Your Nashville Business" required autocomplete="organization"></div>
+          <div class="fg"><label for="site">Current Website URL</label><input type="url" id="site" name="site" placeholder="https://yourbusiness.com"></div>
+          <div class="fg"><label for="svc">Service Interested In</label><select id="svc" name="svc"><option value="" disabled selected>Select a service</option><option>The Refresh ($1,500+)</option><option>The Overhaul ($3,500+)</option><option>The Authority ($7,500+)</option><option>E-Commerce Setup</option><option>Local SEO &amp; Reputation</option><option>Monthly Retainer</option><option>Free Audit Only</option><option>Not Sure Yet</option></select></div>
+          <div class="fg"><label for="msg">Tell us about your project</label><textarea id="msg" name="msg" placeholder="What's your biggest challenge with your current website? What are your goals?"></textarea></div>
+          <button type="submit" class="fsub">Send Message &amp; Request Free Audit →</button>
+        </form>
+        <div class="fsuccess" id="fsuccess" role="alert" aria-live="polite"><div style="font-size:28px;margin-bottom:10px">🎉</div>Message sent! We'll review your site and be in touch within one business day.</div>
+      </div>
+    </div>
+  </div></div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="ft-inner">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <a href="#" class="logo" aria-label="Elevate Digital Group"><div class="logo-mark" aria-hidden="true">E</div><div><span class="logo-name">Elevate Digital Group</span><span class="logo-city">Nashville, TN</span></div></a>
+        <p>Nashville's boutique web modernization agency. We help local businesses get the modern digital presence they deserve — fast, beautiful, and built to convert.</p>
+      </div>
+      <div class="ft-col"><h4>Services</h4><ul class="ft-links"><li><a href="#services">The Refresh</a></li><li><a href="#services">The Overhaul</a></li><li><a href="#services">The Authority</a></li><li><a href="#services">E-Commerce</a></li><li><a href="#services">Local SEO</a></li><li><a href="#pricing">Monthly Retainer</a></li></ul></div>
+      <div class="ft-col"><h4>Company</h4><ul class="ft-links"><li><a href="#about">About Us</a></li><li><a href="#process">Our Process</a></li><li><a href="#results">Case Studies</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div class="ft-col"><h4>Get Started</h4><ul class="ft-links"><li><a href="#contact">Free Website Audit</a></li><li><a href="#pricing">View Pricing</a></li><li><a href="tel:+16155550100">(615) 555-0100</a></li><li><a href="mailto:hello@elevatedigitalgroup.com">hello@elevatedigitalgroup.com</a></li></ul></div>
+    </div>
+    <div class="ft-bottom"><p>© 2025 Elevate Digital Group, LLC · Nashville, Tennessee · All rights reserved.</p><ul class="ft-legal"><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Accessibility</a></li></ul></div>
+  </div>
+</footer>
+<script>
+// Cursor
+const dot=document.getElementById('dot'),ring=document.getElementById('ring');
+if(dot&&ring){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});(function loop(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();document.querySelectorAll('a,button,.pi,.sc,.seg,.tc,.rc,.prc').forEach(el=>{el.addEventListener('mouseenter',()=>{dot.classList.add('h');ring.classList.add('h')});el.addEventListener('mouseleave',()=>{dot.classList.remove('h');ring.classList.remove('h')})})}
+// Nav scroll
+const navbar=document.getElementById('nav');window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>40),{passive:true});
+// Mobile menu
+const ham=document.getElementById('ham'),mob=document.getElementById('mob');
+ham.addEventListener('click',()=>{const o=ham.classList.toggle('open');mob.classList.toggle('open',o);mob.style.display=o?'flex':'none';ham.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':''});
+mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{ham.classList.remove('open');mob.classList.remove('open');mob.style.display='none';ham.setAttribute('aria-expanded','false');document.body.style.overflow=''}));
+// Reveal on scroll
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv,.rl').forEach(el=>obs.observe(el));
+// FAQ accordion
+document.querySelectorAll('.fq').forEach(btn=>{btn.addEventListener('click',()=>{const ans=btn.nextElementSibling,isOpen=btn.classList.contains('open');document.querySelectorAll('.fq').forEach(b=>{b.classList.remove('open');b.setAttribute('aria-expanded','false');b.nextElementSibling.style.maxHeight='0'});if(!isOpen){btn.classList.add('open');btn.setAttribute('aria-expanded','true');ans.style.maxHeight=ans.scrollHeight+'px'}})});
+// Contact form
+document.getElementById('cform').addEventListener('submit',function(e){e.preventDefault();const btn=this.querySelector('.fsub');btn.textContent='Sending…';btn.disabled=true;setTimeout(()=>{this.style.display='none';document.getElementById('fsuccess').style.display='block'},1200)});
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}}));
+</script>
+</body>
+</html>
